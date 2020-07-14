@@ -14,7 +14,7 @@
             class="form-control"
             placeholder="Quantity"
             v-model="quantity"
-            :class="{danger: insufficientFunds}"
+            :class="{ danger: insufficientFunds }"
           />
         </div>
         <div class="pull-right">
@@ -22,45 +22,47 @@
             class="btn btn-success"
             @click="buyStock"
             :disabled="insufficientFunds || quantity <= 0"
-          >{{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }}</button>
+          >
+            {{ insufficientFunds ? "Insufficient Funds" : "Buy" }}
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-.danger {
-  border: 1px solid red;
-}
-</style>
-
 <script>
-export default {
-  props: ["stock"],
-  data() {
-    return {
-      quantity: 0
-    };
-  },
-  computed: {
-    funds() {
-      return this.$store.getters.funds;
-    },
-    insufficientFunds() {
-      return this.quantity * this.stock.price > this.funds;
-    }
-  },
-  methods: {
-    buyStock() {
-      const order = {
-        stockId: this.stock.id,
-        stockPrice: this.stock.price,
-        quantity: this.quantity
+  export default {
+    props: ["stock"],
+    data() {
+      return {
+        quantity: 0,
       };
-      this.$store.dispatch("buyStock", order);
-      this.quantity = 0;
-    }
-  }
-};
+    },
+    computed: {
+      funds() {
+        return this.$store.getters.funds;
+      },
+      insufficientFunds() {
+        return this.quantity * this.stock.price > this.funds;
+      },
+    },
+    methods: {
+      buyStock() {
+        const order = {
+          stockId: this.stock.id,
+          stockPrice: this.stock.price,
+          quantity: this.quantity,
+        };
+        this.$store.dispatch("buyStock", order);
+        this.quantity = 0;
+      },
+    },
+  };
 </script>
+
+<style scoped>
+  .danger {
+    border: 1px solid red;
+  }
+</style>

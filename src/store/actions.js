@@ -3,8 +3,8 @@ import Vue from "vue";
 export const loadData = ({ commit }) => {
   Vue.http
     .get("data.json")
-    .then((response) => response.json())
-    .then((data) => {
+    .then(response => response.json())
+    .then(data => {
       if (data) {
         const stocks = data.stocks;
         const funds = data.funds;
@@ -12,7 +12,7 @@ export const loadData = ({ commit }) => {
 
         const portfolio = {
           stockPortfolio,
-          funds,
+          funds
         };
 
         commit("SET_STOCKS", stocks);

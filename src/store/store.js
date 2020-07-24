@@ -12,6 +12,6 @@ export default new Vuex.Store({
   actions,
   modules: {
     stocks,
-    portfolio,
-  },
+    portfolio
+  }
 });

@@ -11,18 +11,18 @@ Vue.use(VueResource);
 
 Vue.http.options.root = "https://vue-stock-trade-50bc3.firebaseio.com/";
 
-Vue.filter("currency", (value) => {
+Vue.filter("currency", value => {
   return "$" + value.toLocaleString();
 });
 
 const router = new VueRouter({
   mode: "history",
-  routes,
+  routes
 });
 
 new Vue({
   el: "#app",
   router,
   store,
-  render: (h) => h(App),
+  render: h => h(App)
 });
